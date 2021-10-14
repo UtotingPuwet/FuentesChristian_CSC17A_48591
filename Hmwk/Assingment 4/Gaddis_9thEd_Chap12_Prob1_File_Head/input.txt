@@ -1,0 +1,10 @@
+hello
+hi
+hey
+yo
+goodmorning
+bye
+seeya
+goodbye
+adios
+chao
