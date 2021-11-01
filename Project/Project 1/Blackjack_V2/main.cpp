@@ -1,12 +1,11 @@
 /* 
  * File:   main.cpp
  * Author: Christian Fuentes
- * Created on October 28, 2021. 1:46 AM
+ * Created on October 30, 2021. 10:46 PM
  * Purpose:  Game without menu
- * Probably get most of it down...?
- * FIXED DECK BUGS (random number was = to value of a card..???
- * FIXED ACE BUG
- * 
+ * Modularize and optimize the game 
+ * (Really terrible version 1 in my opinion....)
+ * Create logic for Ace card.
  */
 
 //System Libraries
@@ -28,8 +27,10 @@ int draw(Deck *, string);
 void print (Deck *);
 int p1Menu (Deck *, Player);
 bool check21 (Player);
+bool chckFrst (Player &, Player);
 void game (Deck *, Player, Player);
 int delMenu (Deck *, Player);
+Player chckWin (Player, Player);
 
 
 //Execution Begins Here
@@ -103,7 +104,7 @@ int hidDraw (Deck *deck) {                                                      
     return deck->cards[random].val;
 }
 
-void print (Deck *deck) {
+void print (Deck *deck) {                                                                           //Print for the deck
     for (int i = 0; i < 52; i++) {
         int random = rand()%52;
         cout << deck->cards[random].face << " of " << deck->cards[random].suit << " has value of " << deck->cards[random].val << '\n';
@@ -123,34 +124,15 @@ void game (Deck *deck, Player p1, Player dealer) {
     p1.hand += draw(deck,p1.ref);
     
     cout << "Your hand is " << p1.hand << '\n';
-    //Check 21 for the player.
-    if (check21(p1) == true) {
-        p1.frstTrn = true;
-    }
+
     //Initialize dealer hand
     dealer.hand += draw(deck,dealer.ref);
     dealer.hand += hidDraw(deck);                   //Doesn't print out this card
-    //Check 21 for dealer
-    if (check21(dealer) == true) {
-        dealer.frstTrn = true;
-    }
-    //Fully check all possibilities for player or dealer getting 21
-    if (dealer.frstTrn == true && p1.frstTrn == true) {
-        cout << "PUSH!" << endl;
-        p1.pushes++;
-        return;
-    }
-    else if (dealer.frstTrn == true && p1.frstTrn == false) {
-        cout << "DEALER WON!" << endl;
-        p1.loss++;
-        return;
-    }
-    else if (dealer.frstTrn == false && p1.frstTrn == true) {
-        cout << "PLAYER GOT 21!" << endl;
-        p1.wins++;
-        return;
-    }
     
+    
+    if (chckFrst(p1,dealer) == true) {
+        return;
+    }
     
     
     p1.hand = p1Menu(deck, p1);
@@ -161,41 +143,41 @@ void game (Deck *deck, Player p1, Player dealer) {
     cout << "\nDealer hand is " << dealer.hand << '\n';
     
     //Compare hands and check 21
-    if (dealer.hand == 21 && p1.hand == 21) {
+    p1 = chckWin(p1,dealer);
+}
+
+
+//Using this to check if anyone got 21 within the first cards that were drawn
+//If anyone did the function will return true and in the game function
+//The game function will return and exit the game announcing the winner
+bool chckFrst (Player &p1, Player dealer) {
+    //Check 21 for the player.
+    if (check21(p1) == true) {
+        p1.frstTrn = true;
+    }
+    //Check 21 for dealer
+    if (check21(dealer) == true) {
+        dealer.frstTrn = true;
+    }
+    //Fully check all possibilities for player or dealer getting 21
+    if (dealer.frstTrn == true && p1.frstTrn == true) {
         cout << "PUSH!" << endl;
         p1.pushes++;
-        return;
+        return true;
     }
-    else if (dealer.hand == 21 && p1.hand != 21) {
+    else if (dealer.frstTrn == true && p1.frstTrn == false) {
         cout << "DEALER WON!" << endl;
         p1.loss++;
-        return;
+        return true;
     }
-    else if (dealer.hand != 21 && p1.hand == 21) {
+    else if (dealer.frstTrn == false && p1.frstTrn == true) {
         cout << "PLAYER GOT 21!" << endl;
         p1.wins++;
-        return;
+        return true;
     }
-    else {
-        if (p1.hand > 21) {
-            cout << "PLAYER BUSTED!" << endl;
-        }
-        else if (dealer.hand > 21) {
-            cout << "DEALER BUSTED!" << endl;
-        }
-        else {
-            if (dealer.hand > p1.hand) {
-            cout << "DEALER WINS!" << endl;
-            }
-            else if (dealer.hand == p1.hand) {
-                cout << "PUSH!" << endl;
-            }
-            else if (dealer.hand < p1.hand) {
-                cout << "PLAYER WINS!" << endl;
-            }
-        }
-    }
+    return false;
 }
+
 
 bool check21 (Player player) {
     if (player.hand == 21) {
@@ -203,6 +185,57 @@ bool check21 (Player player) {
     }
     return false;
 }
+
+
+Player chckWin (Player p1, Player dealer) {
+    if (dealer.hand == 21 && p1.hand == 21) {           //dealer compare for 21 and player 21
+        cout << "PUSH!" << endl;
+        p1.pushes++;
+        return p1;
+    }
+    else if (dealer.hand == 21 && p1.hand != 21) {     //dealer check for 21
+        cout << "DEALER WON!" << endl;
+        p1.loss++;
+        return p1;
+    }
+    else if (dealer.hand != 21 && p1.hand == 21) {     //player check  for 21
+        cout << "PLAYER GOT 21!" << endl;
+        p1.wins++;
+        return p1;
+    }
+    else {
+        if (p1.hand > 21) {                            //check for player bust
+            cout << "PLAYER BUSTED!" << endl;
+            p1.loss++;
+            return p1;
+        }
+        else if (dealer.hand > 21) {                   //check for dealer bust
+            cout << "DEALER BUSTED!" << endl;
+            p1.wins++;
+            return p1;
+        }
+        else {
+            if (dealer.hand > p1.hand) {              //check if dealer greater
+                cout << "DEALER WINS!" << endl;
+                p1.loss++;
+                return p1;
+            }
+            else if (dealer.hand == p1.hand) {        //check push
+                cout << "PUSH!" << endl;
+                p1.pushes++;
+                return p1;
+            }
+            else if (dealer.hand < p1.hand) {         //check player greater
+                cout << "PLAYER WINS!" << endl;
+                p1.wins++;
+                return p1;
+            }
+        }
+    }
+    return p1;                                        //return to keep track of player.
+}
+
+
 
 int p1Menu (Deck *deck, Player p1) {
     char choice;
