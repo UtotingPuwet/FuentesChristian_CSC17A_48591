@@ -28,7 +28,7 @@ void print (Deck *);
 int p1Menu (Deck *, Player);
 bool check21 (Player);
 bool chckFrst (Player &, Player);
-void game (Deck *, Player, Player);
+Player game (Deck *, Player, Player);
 int delMenu (Deck *, Player);
 Player chckWin (Player, Player);
 
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     
     //Process or map Inputs to Outputs
     
-    game (deck, p1, dealer);
+    p1 = game (deck, p1, dealer);
     
     //Display Outputs
     destroy (deck);
@@ -112,7 +112,7 @@ void print (Deck *deck) {                                                       
 }
 
 
-void game (Deck *deck, Player p1, Player dealer) {
+Player game (Deck *deck, Player p1, Player dealer) {
     //Initialize player and dealer
     p1.hand = 0;
     p1.ref = "You";
@@ -131,7 +131,7 @@ void game (Deck *deck, Player p1, Player dealer) {
     
     
     if (chckFrst(p1,dealer) == true) {
-        return;
+        return p1;
     }
     
     
@@ -144,6 +144,8 @@ void game (Deck *deck, Player p1, Player dealer) {
     
     //Compare hands and check 21
     p1 = chckWin(p1,dealer);
+    
+    return p1;
 }
 
 
