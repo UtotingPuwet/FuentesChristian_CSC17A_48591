@@ -6,6 +6,7 @@
  * Modularize and optimize the game 
  * (Really terrible version 1 in my opinion....)
  * Create logic for Ace card.
+ * Added menu
  */
 
 //System Libraries
@@ -24,6 +25,7 @@ using namespace std;
 void destroy (Deck *);
 Deck *iniDeck ();
 int draw(Deck *, string);
+int hidDraw (Deck *);
 void print (Deck *);
 int p1Menu (Deck *, Player);
 bool check21 (Player);
@@ -31,6 +33,7 @@ bool chckFrst (Player &, Player);
 Player game (Deck *, Player, Player);
 int delMenu (Deck *, Player);
 Player chckWin (Player, Player);
+void menu();
 
 
 //Execution Begins Here
@@ -41,12 +44,18 @@ int main(int argc, char** argv) {
     Deck *deck = iniDeck();
     Player p1,
            dealer;
+    char again = 'y';
     //Initialize Variables
     
     
     //Process or map Inputs to Outputs
+    menu();
+    do {
+        p1 = game (deck, p1, dealer);
+        cout << "Would you like to play again? Enter y or Y.\n";
+        cin >> again;
+    }while (again == 'y' || again == 'Y');
     
-    p1 = game (deck, p1, dealer);
     
     //Display Outputs
     destroy (deck);
@@ -238,7 +247,6 @@ Player chckWin (Player p1, Player dealer) {
 }
 
 
-
 int p1Menu (Deck *deck, Player p1) {
     char choice;
     do {
@@ -259,4 +267,31 @@ int delMenu(Deck *deck, Player dealer) {
         cout << "Dealer hand is now " << dealer.hand << '\n';
     }
     return dealer.hand;
+}
+
+void menu () {
+    char choice;
+    do {
+        cout << "Welcome to Christian's Blackjack!" << '\n';
+        cout << "Press 1 to play Blackjack.\n"
+             << "Press 2 to see how to play Blackjack.\n"
+             << "Press 3 to exit program.\n";
+        cin>>choice;
+        if (choice == '2') {
+            cout << "The goal of blackjack is to get a hand equal to 21." <<
+                        "Each card is worth its numerical value, face cards " <<
+                        "are worth 10, and ace is worth either 1 or 11.\n" << 
+                        "Both the player and the dealer start with 2 cards " <<
+                        "and the dealer flips " <<
+                        "only 1 card up to show to the player. The player must " <<
+                        "then decide if they want to hit (draw)\nor stand (not " <<
+                        "draw).Press 1 to hit and 2 to stand.\n";
+        }
+        else if (choice == '3') {
+            exit(0);
+        }
+        else if (choice > '4' || choice < '1') {
+            cout << "Please enter  valid number\n";
+        }
+    }while (choice != '1');
 }
