@@ -18,9 +18,9 @@
 struct Player {
     bool frstTrn = false;
     int hand;
-    int wins;
-    int loss;
-    int pushes;
+    int wins = 0;
+    int loss = 0;
+    int pushes = 0;
     string ref; 
 };
 
