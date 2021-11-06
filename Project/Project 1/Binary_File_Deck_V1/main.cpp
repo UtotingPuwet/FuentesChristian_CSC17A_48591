@@ -21,7 +21,7 @@ using namespace std;
 void destroy (Deck *);
 Deck *iniDeck ();
 void print (Deck *);
-void binDeck(Deck *);
+Deck *binDeck(Deck *);
 void toFile (Deck *, fstream &);
 Deck *frmFile (Deck *, fstream &);
 
@@ -29,6 +29,7 @@ Deck *frmFile (Deck *, fstream &);
 int main(int argc, char** argv) {
     //Declare Variable Data Types and Constants
     Deck *deck = iniDeck();
+    Deck *deck2 = binDeck(deck);
     //Initialize Variables
     
     
@@ -38,9 +39,12 @@ int main(int argc, char** argv) {
     
     binDeck(deck);
     
-    
+    print(deck2);
     //Display Outputs
+    destroy (deck2);
     destroy (deck);
+    
+    
     //Exit stage right!
     return 0;
 }
@@ -87,9 +91,9 @@ void print (Deck *deck) {
     }
 }
 
-void binDeck (Deck *deck) {
+Deck *binDeck (Deck *deck) {
     fstream binFile;
-    Deck *deck2 = new Deck;
+    Deck *deck2;
     binFile.open("cards.bin", ios::binary | ios::in | ios::out);
     
     toFile(deck,binFile);
@@ -98,29 +102,24 @@ void binDeck (Deck *deck) {
     
     binFile.close();
     
-    print(deck2);
-    delete []deck2->cards;
-    delete deck2;
+    return deck2;
 }
 
 void toFile (Deck *deck, fstream &binFile) {
     long cursor = 0L;
-    for (int i = 0; i < 52; i++) {
-        cursor = sizeof(Card) * i;
-        binFile.seekp(cursor,ios::beg);
-        binFile.write(reinterpret_cast<char *> (&deck->cards[i]),sizeof(Card));
-    }
+
+    binFile.seekp(cursor,ios::beg);
+    binFile.write(reinterpret_cast<char *> (deck->cards),sizeof(Card) * 52);
+
 }
 
 Deck *frmFile(Deck *deck2, fstream &binFile) {
     long cursor = 0L;
     
-    for (int i = 0; i < 52; i++) {
-        cursor = sizeof(Card) * i;
-        binFile.seekg(cursor,ios::beg);
-        binFile.read(reinterpret_cast<char *> (&deck2->cards[i]), sizeof(Card));
-    }
+    Deck *deck =  new Deck;
+    binFile.seekg(cursor,ios::beg);
+    binFile.read(reinterpret_cast<char *> (deck->cards), sizeof(Card) * 52);
     
     
-    return deck2;
+    return deck;
 }
