@@ -138,12 +138,12 @@ Player game (Deck *deck, Player p1, Player dealer) {
     dealer.hand += draw(deck,dealer.ref);
     dealer.hand += hidDraw(deck);                   //Doesn't print out this card
     
-    
+    //Check if either player got ace from first turn.
     if (chckFrst(p1,dealer) == true) {
         return p1;
     }
     
-    
+    //p1menu will ask player if stand or hit.
     p1.hand = p1Menu(deck, p1);
     
     cout << "\nDealer hand is " << dealer.hand << '\n' << '\n';
