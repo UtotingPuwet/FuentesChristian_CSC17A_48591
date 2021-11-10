@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     
     //Display Outputs
     destroy (deck);
-    destroy (deck2);
+    delete deck2;
     //Exit stage right!
     return 0;
 }
