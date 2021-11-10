@@ -36,13 +36,9 @@ int main(int argc, char** argv) {
     
     //Process or map Inputs to Outputs
     
-    
-    binDeck(deck);
-    
-    print(deck2);
     //Display Outputs
-    destroy (deck2);
     destroy (deck);
+    cout << deck2->cards[0].face << " of " << deck2->cards[0].suit << " has value of " << deck2->cards[0].val;
     
     
     //Exit stage right!
@@ -56,7 +52,7 @@ void destroy (Deck *deck) {
 
 Deck *iniDeck () {
     Deck *deck = new Deck;
-    
+    deck->cards = new Card[52];
 
     for (int i = 0; i < 52; i++) {
         switch (i%4) {
@@ -117,6 +113,7 @@ Deck *frmFile(Deck *deck2, fstream &binFile) {
     long cursor = 0L;
     
     Deck *deck =  new Deck;
+    deck->cards = new Card[52];
     binFile.seekg(cursor,ios::beg);
     binFile.read(reinterpret_cast<char *> (deck->cards), sizeof(Card) * 52);
     

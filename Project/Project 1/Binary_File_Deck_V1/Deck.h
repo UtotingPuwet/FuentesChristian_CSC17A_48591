@@ -15,7 +15,7 @@
 #define DECK_H
 #include "Card.h"
 struct Deck {
-    Card *cards = new Card [52];
+    Card *cards;
 };
 
 
