@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Christian Fuentes
  * Created on October 30, 2021. 10:46 PM
- * Purpose:  Game without menu
+ * Purpose:  Game without ace
  * Modularize and optimize the game 
  * (Really terrible version 1 in my opinion....)
  * Create logic for Ace card.
@@ -29,7 +29,7 @@ int hidDraw (Deck *);
 void print (Deck *);
 int p1Menu (Deck *, Player);
 bool check21 (Player);
-bool chckFrst (Player &, Player);
+bool chkFrst (Player &, Player);
 Player game (Deck *, Player, Player);
 int delMenu (Deck *, Player);
 Player chckWin (Player, Player);
@@ -139,7 +139,7 @@ Player game (Deck *deck, Player p1, Player dealer) {
     dealer.hand += hidDraw(deck);                   //Doesn't print out this card
     
     //Check if either player got ace from first turn.
-    if (chckFrst(p1,dealer) == true) {
+    if (chkFrst(p1,dealer) == true) {
         return p1;
     }
     
@@ -161,7 +161,7 @@ Player game (Deck *deck, Player p1, Player dealer) {
 //Using this to check if anyone got 21 within the first cards that were drawn
 //If anyone did the function will return true and in the game function
 //The game function will return and exit the game announcing the winner
-bool chckFrst (Player &p1, Player dealer) {
+bool chkFrst (Player &p1, Player dealer) {
     //Check 21 for the player.
     if (check21(p1) == true) {
         p1.frstTrn = true;
