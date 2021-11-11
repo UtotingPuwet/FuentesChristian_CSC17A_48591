@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Christian Fuentes
- * Created on October 30, 2021. 10:46 PM
- * Purpose:  Game without menu
+ * Created on November 3, 2021. 2:22 PM
+ * Purpose:  Game with binary
  * Modularize and optimize the game 
  * (Really terrible version 1 in my opinion....)
  * Create logic for Ace card.
@@ -25,7 +25,7 @@ using namespace std;
 //Function Prototypes
 void destroy (Deck *);
 Deck *iniDeck ();
-int draw(Deck *, string);
+int draw(Deck *, Player);
 int hidDraw (Deck *);
 void print (Deck *);
 int p1Menu (Deck *, Player);
@@ -41,6 +41,10 @@ void menu(Deck *);
 Deck *binDeck(Deck *);
 void toFile (Deck *, fstream &);
 Deck *frmFile (Deck *, fstream &);
+
+//Enumeration
+
+enum MAX_CARDS {MAX_CARDS = 52 };
 
 //Execution Begins Here
 int main(int argc, char** argv) {
@@ -80,7 +84,7 @@ Deck *iniDeck () {
     Deck *deck = new Deck;
     
 
-    for (int i = 0; i < 52; i++) {
+    for (int i = 0; i < MAX_CARDS; i++) {
         switch (i%4) {
             case 0: deck->cards[i].suit = "Hearts"; break;
             case 1: deck->cards[i].suit = "Diamonds"; break;
@@ -107,10 +111,17 @@ Deck *iniDeck () {
     return deck;
 }
 
-int draw (Deck *deck, string person) {
+int draw (Deck *deck, Player player) {
     int random = rand()%52;
    
-    cout << person << " got a " << deck->cards[random].face << " of " << deck->cards[random].suit << '\n'; //Open draw for player and dealer
+    cout << player.ref << " got a " << deck->cards[random].face << " of " << deck->cards[random].suit << '\n'; //Open draw for player and dealer
+    
+    
+    if (deck->cards[random].val == 1 && player.hand <= 10) {                                        //Ace logic
+        return 11;
+    }
+    
+    
     
     return deck->cards[random].val;
 }
@@ -136,13 +147,13 @@ Player game (Deck *deck, Player p1, Player dealer) {
     dealer.hand = 0;
     dealer.ref = "Dealer";
     //Initialize player draw
-    p1.hand += draw(deck,p1.ref);
-    p1.hand += draw(deck,p1.ref);
+    p1.hand += draw(deck,p1);
+    p1.hand += draw(deck,p1);
     
     cout << "Your hand is " << p1.hand << '\n';
 
     //Initialize dealer hand
-    dealer.hand += draw(deck,dealer.ref);
+    dealer.hand += draw(deck,dealer);
     dealer.hand += hidDraw(deck);                   //Doesn't print out this card
     
     //Check if either player got ace from first turn.
@@ -184,7 +195,7 @@ bool chckFrst (Player &p1, Player dealer) {
         return true;
     }
     else if (dealer.frstTrn == true && p1.frstTrn == false) {
-        cout << "DEALER WON!" << endl;
+        cout << "DEALER GOT 21!" << endl;
         p1.loss++;
         return true;
     }
@@ -212,7 +223,7 @@ Player chckWin (Player p1, Player dealer) {
         return p1;
     }
     else if (dealer.hand == 21 && p1.hand != 21) {     //dealer check for 21
-        cout << "DEALER WON!" << endl;
+        cout << "DEALER GOT 21!" << endl;
         p1.loss++;
         return p1;
     }
@@ -261,7 +272,7 @@ int p1Menu (Deck *deck, Player p1) {
         cout << "Press 2 to stand." << endl;
         cin>>choice;
         if (choice == '1' && p1.hand < 21) {
-            p1.hand += draw(deck,p1.ref);
+            p1.hand += draw(deck,p1);
         }
         cout << "Your hand is " << p1.hand << endl;
     }while (choice == '1' && p1.hand < 21);
@@ -270,21 +281,21 @@ int p1Menu (Deck *deck, Player p1) {
 
 int delMenu(Deck *deck, Player dealer) {
     while (dealer.hand < 17) {
-        dealer.hand += draw(deck,dealer.ref);
+        dealer.hand += draw(deck,dealer);
         cout << "Dealer hand is now " << dealer.hand << '\n';
     }
     return dealer.hand;
 }
 
 void menu (Deck *deck2) {
-    char choice;
+    char *choice = new char [32];                                                   //random size, doesn't matter will be deallocated later :)
     do {
         cout << "Welcome to Christian's Blackjack!" << '\n';
         cout << "Press 1 to play Blackjack.\n"
              << "Press 2 to see how to play Blackjack.\n"
              << "Press 3 to print binary file version of deck.\n";
         cin>>choice;
-        if (choice == '2') {
+        if (*choice == '2') {
             cout << "The goal of blackjack is to get a hand equal to 21." <<
                         "Each card is worth its numerical value, face cards " <<
                         "are worth 10, and ace is worth either 1 or 11.\n" << 
@@ -294,16 +305,18 @@ void menu (Deck *deck2) {
                         "then decide if they want to hit (draw)\nor stand (not " <<
                         "draw).Press 1 to hit and 2 to stand.\n";
         }
-        else if (choice == '3') {
+        else if (*choice == '3') {
             print(deck2);
         }
-        else if (choice == '4') {
+        else if (*choice == '4') {
+            delete []choice;
             exit(0);
         }
-        else if (choice > '5' || choice < '1') {
+        else if (*choice > '5' || *choice < '1') {
             cout << "Please enter  valid number\n";
         }
-    }while (choice != '1');
+    }while (*choice != '1');
+    delete []choice;
 }
 
 Deck *binDeck (Deck *deck) {

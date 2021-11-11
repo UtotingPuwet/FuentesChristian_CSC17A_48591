@@ -35,12 +35,9 @@ int main(int argc, char** argv) {
     
     
     //Process or map Inputs to Outputs
-    
+    print (deck2);
     //Display Outputs
-    destroy (deck);
-    cout << deck2->cards[0].face << " of " << deck2->cards[0].suit << " has value of " << deck2->cards[0].val;
-    
-    
+    destroy (deck2);
     //Exit stage right!
     return 0;
 }
