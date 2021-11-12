@@ -30,20 +30,19 @@ int hidDraw (Deck *);
 void print (Deck *);
 int p1Menu (Deck *, Player);
 bool check21 (Player);
-bool chckFrst (Player &, Player);
+bool chkFrst (Player &, Player);
 Player game (Deck *, Player, Player);
 int delMenu (Deck *, Player);
 Player chckWin (Player, Player);
 void menu(Deck *);
 
-
+//Binary file prototypes
 
 Deck *binDeck(Deck *);
 void toFile (Deck *, fstream &);
 Deck *frmFile (Deck *, fstream &);
 
 //Enumeration
-
 enum MAX_CARDS {MAX_CARDS = 52 };
 
 //Execution Begins Here
@@ -96,7 +95,7 @@ Deck *iniDeck () {
                 case 11: deck->cards[i].face = "Jack"; break;
                 case 12: deck->cards[i].face = "Queen"; break;
                 case 13: deck->cards[i].face = "King"; break;
-            }
+            }   
             deck->cards[i].val = 10;
         }
         else if ((i%13)+1 == 1) {
@@ -129,6 +128,10 @@ int draw (Deck *deck, Player player) {
 int hidDraw (Deck *deck) {                                                                          //Hidden draw for dealer
     int random = rand()%52;
     
+    if (deck->cards[random].val == 1) {
+        return 11;
+    }
+    
     return deck->cards[random].val;
 }
 
@@ -157,7 +160,7 @@ Player game (Deck *deck, Player p1, Player dealer) {
     dealer.hand += hidDraw(deck);                   //Doesn't print out this card
     
     //Check if either player got ace from first turn.
-    if (chckFrst(p1,dealer) == true) {
+    if (chkFrst(p1,dealer) == true) {
         return p1;
     }
     
@@ -179,7 +182,7 @@ Player game (Deck *deck, Player p1, Player dealer) {
 //Using this to check if anyone got 21 within the first cards that were drawn
 //If anyone did the function will return true and in the game function
 //The game function will return and exit the game announcing the winner
-bool chckFrst (Player &p1, Player dealer) {
+bool chkFrst (Player &p1, Player dealer) {
     //Check 21 for the player.
     if (check21(p1) == true) {
         p1.frstTrn = true;
@@ -293,7 +296,7 @@ void menu (Deck *deck2) {
         cout << "Welcome to Christian's Blackjack!" << '\n';
         cout << "Press 1 to play Blackjack.\n"
              << "Press 2 to see how to play Blackjack.\n"
-             << "Press 3 to print binary file version of deck.\n";
+             << "Press 3 to print binary file version of deck.\n";  
         cin>>choice;
         if (*choice == '2') {
             cout << "The goal of blackjack is to get a hand equal to 21." <<
