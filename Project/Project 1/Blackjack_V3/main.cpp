@@ -296,7 +296,7 @@ void menu (Deck *deck2) {
         cout << "Welcome to Christian's Blackjack!" << '\n';
         cout << "Press 1 to play Blackjack.\n"
              << "Press 2 to see how to play Blackjack.\n"
-             << "Press 3 to print binary file version of deck.\n";  
+             << "Press 3 to print binary file version of deck.\nPress 4 to exit.\n";  
         cin>>choice;
         if (*choice == '2') {
             cout << "The goal of blackjack is to get a hand equal to 21." <<
