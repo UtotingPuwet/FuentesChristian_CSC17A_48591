@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Creating_Deck_Class_V2
+PROJECTNAME=Creating_Deck_Class_V3
 
 # Active Configuration
 DEFAULTCONF=Debug
