@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Christian Fuentes
  * Created on November 29, 2021. 11:59 PM
- * Purpose:  Creating cards using classes. Automated it a little more. Can now use arrays.
+ * Purpose:  Creating cards using classes. Created deck class and using pointers now.
  */
 
 //System Libraries
@@ -18,7 +18,7 @@ using namespace std;
 //Execution Begins Here
 int main(int argc, char** argv) {
     //Declare Variable Data Types and Constants
-    Card card[52];
+    Card *card = new Card[52];
     //Initialize Variables
     for (int i = 0; i < 52; i++) {
         card[i].iniCard(i);
@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 52; i++) {
         cout <<  card[i].getSuit() << " of " << card[i].getFace() << " is equal to " << card[i].getVal() << '\n';
     }
+    //Reallocate Memory
+    
+    delete []card;
+    
     //Exit stage right!
     return 0;
 }
