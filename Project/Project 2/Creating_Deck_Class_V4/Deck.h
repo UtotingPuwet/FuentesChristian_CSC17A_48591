@@ -16,12 +16,12 @@
 #include "Card.h"
 
 class Deck {
-private:
+protected:
     Card *deck = new Card[52];
 public:
     Deck();
     ~Deck();
-    int deal(int);
+    virtual int deal(int);
 };
 
 

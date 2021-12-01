@@ -2,7 +2,7 @@
  * File:   main.cpp
  * Author: Christian Fuentes
  * Created on November 29, 2021. 11:59 PM
- * Purpose:  Creating cards using classes. Created deck class and using pointers now.
+ * Purpose:  Creating cards using classes. Added a dealer deck.
  */
 
 //System Libraries
@@ -21,12 +21,14 @@ int main(int argc, char** argv) {
     //Random number seed
     srand(static_cast<unsigned int>(time(NULL)));
     //Declare Variable Data Types and Constants
-    Deck deck;
+    Deck deck,
+         dealDek;
     int random = rand()%52;
     //Initialize Variables
     
     //Process or map Inputs to Outputs
-    cout << deck.deal(random);
+    cout << deck.deal(random) << endl;
+    cout << dealDek.deal(random);               //proof that both of them run the same.
     //Display Outputs
     
     //Reallocate Memory
