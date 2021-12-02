@@ -12,6 +12,7 @@
  */
 
 #include "Player.h"
+#include <iostream>
 
 Player::Player(string name) {
     this->name = name;
@@ -32,6 +33,14 @@ int Player::draw(int random) {
     return hand += n;
 }
 
-int Player::iniHand(int n) {
-    return n;
+int Player::iniHand() {
+    int random = rand()%52;
+    hand = 0;
+    for (int i = 0; i < 2; i++) {
+        draw(random);
+        std::cout << hand << endl;
+        random = rand()%52;
+    }
+    return hand;
+    
 }

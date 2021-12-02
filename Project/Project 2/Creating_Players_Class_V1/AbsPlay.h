@@ -20,7 +20,7 @@ using namespace std;
 
 class AbsPlay {
 public:
-    virtual int iniHand(int) = 0;
+    virtual int iniHand() = 0;
     virtual int getHand() = 0;
     virtual string getName() = 0;
 };
