@@ -39,9 +39,10 @@ public:
     int iniHand();
     int draw(int);
     
-    Player& operator++();
-    Player& operator--();
+    Player& operator++(int);
+    Player& operator--(int);
     Player& operator+(const Player&);
+    Player& operator-(const Player&);
 };
 
 
