@@ -28,10 +28,8 @@ int main(int argc, char** argv) {
     //Initialize Variables
     
     //Process or map Inputs to Outputs
-    for (int i = 0; i < 12; i++) {
-        random = rand()%52;
-        cout << "Hand = " << p1.draw(random) << endl;
-    }
+    p1.iniHand();
+    
     
     //Display Outputs
     

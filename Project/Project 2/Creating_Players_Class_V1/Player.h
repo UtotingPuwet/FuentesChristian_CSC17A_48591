@@ -34,7 +34,7 @@ public:
     int getPush() {return pushes;}
     string getName() {return name;}
     
-    int iniHand(int);
+    int iniHand();
     int draw(int);
 };
 
