@@ -64,14 +64,14 @@ int Player::iniHand() {
     
 }
 
-Player& Player::operator ++() {
+Player& Player::operator ++(int n) {
     wins++;
     losses++;
     pushes++;
     return *this;
 }
 
-Player& Player::operator --() {
+Player& Player::operator --(int n) {
     wins--;
     losses--;
     pushes--;
@@ -82,5 +82,12 @@ Player& Player::operator +(const Player &p2) {
     wins = this->wins + p2.wins;
     losses = this->losses + p2.losses;
     pushes = this->pushes + p2.pushes;
+    return *this;
+}
+
+Player& Player::operator -(const Player& p2) {
+    wins = this->wins - p2.wins;
+    losses = this->losses - p2.losses;
+    pushes = this->pushes - p2.pushes;
     return *this;
 }
