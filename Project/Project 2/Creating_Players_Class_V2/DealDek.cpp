@@ -25,8 +25,8 @@ DealDek::~DealDek() {
     delete []dealDek;
 }
 
-int DealDek::deal(int i) {
-    cout << dealDek[i].getSuit() << " of " << dealDek[i].getFace() << " is equal to " << dealDek[i].getVal() << '\n';
+int DealDek::deal(int i,string name) {
+    cout << name << " got a " << dealDek[i].getSuit() << " of " << dealDek[i].getFace() << '\n';
     return dealDek[i].getVal();
 }
 

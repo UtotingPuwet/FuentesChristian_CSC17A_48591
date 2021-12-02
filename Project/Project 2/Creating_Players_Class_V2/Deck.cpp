@@ -25,7 +25,7 @@ Deck::~Deck() {
     delete []deck;
 }
 
-int Deck::deal(int i) {
-    cout << deck[i].getSuit() << " of " << deck[i].getFace() << " is equal to " << deck[i].getVal() << '\n';
+int Deck::deal(int i,string name) {
+    cout << name << " got a " << deck[i].getSuit() << " of " << deck[i].getFace() << '\n';
     return deck[i].getVal();
 }

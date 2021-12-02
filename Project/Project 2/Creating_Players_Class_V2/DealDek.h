@@ -21,7 +21,7 @@ class DealDek : public Deck{
     public:
         DealDek();
         ~DealDek();
-        int deal(int);
+        int deal(int,string);
         int hidDeal(int);
 };
 

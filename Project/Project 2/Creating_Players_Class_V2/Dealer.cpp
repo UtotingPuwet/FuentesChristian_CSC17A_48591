@@ -18,24 +18,26 @@ using namespace std;
 
 Dealer::Dealer() {
     int random = rand()%5;
-    name = names[random];
+    name += "Dealer " + names[random];
     hand = 0;
 }
 
 int Dealer::iniHand() {
     int random = rand()%52;
-    hand += dealDek.deal(random);
+    hand += dealDek.deal(random,name);
     random = rand()%52;
     hand += dealDek.hidDeal(random);
     return hand;
 }
 
 int Dealer::draw(int random) {
-    int n = dealDek.deal(random);
+    int n = dealDek.deal(random,name);
     if (n == 1 && hand < 10) {
+        cout << name << " got a ";
         return hand += 11;
     }
     else {
+        cout << name << " got a ";
         return hand += n;
     }
     return hand += n;

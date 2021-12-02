@@ -34,7 +34,7 @@ Player::Player(string name) {
 }
 
 int Player::draw(int random) {
-    int n = deck.deal(random);
+    int n = deck.deal(random,name);
     if (n == 1 && hand < 10) {
         return hand += 11;
     }
@@ -48,7 +48,7 @@ int Player::iniHand() {
     int random = rand()%52;
     hand = 0;
     for (int i = 0; i < 2; i++) {
-        draw(random);
+        hand = draw(random);
         std::cout << hand << endl;
         random = rand()%52;
     }
