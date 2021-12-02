@@ -21,7 +21,7 @@ protected:
 public:
     Deck();
     ~Deck();
-    virtual int deal(int);
+    virtual int deal(int,string);
 };
 
 

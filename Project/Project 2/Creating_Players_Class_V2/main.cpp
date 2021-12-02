@@ -30,10 +30,13 @@ int main(int argc, char** argv) {
     //Initialize Variables
     
     //Process or map Inputs to Outputs
-    cout << dealer.iniHand() << '\n';
-    cout << dealer.draw(random) << '\n';
+    dealer.iniHand() << '\n';
+
     
-    cout << dealer.getName() << " hand is a " << dealer.getHand() << '\n';
+    cout << '\n' << '\n' << '\n';
+    cout << p1.iniHand() << '\n';
+    random = rand()%52;
+    cout << p1.draw(random) << '\n';
     
     //Display Outputs
     
