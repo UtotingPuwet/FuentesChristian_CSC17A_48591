@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin_1-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin_1-Windows
-CND_ARTIFACT_NAME_Debug=creating_players_class_v3
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_1-Windows/creating_players_class_v3
+CND_ARTIFACT_NAME_Debug=blackjack_v1
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_1-Windows/blackjack_v1
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin_1-Windows/package
-CND_PACKAGE_NAME_Debug=creatingplayersclassv3.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_1-Windows/package/creatingplayersclassv3.tar
+CND_PACKAGE_NAME_Debug=blackjackv1.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_1-Windows/package/blackjackv1.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin_1-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin_1-Windows
-CND_ARTIFACT_NAME_Release=creating_players_class_v3
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_1-Windows/creating_players_class_v3
+CND_ARTIFACT_NAME_Release=blackjack_v1
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_1-Windows/blackjack_v1
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin_1-Windows/package
-CND_PACKAGE_NAME_Release=creatingplayersclassv3.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin_1-Windows/package/creatingplayersclassv3.tar
+CND_PACKAGE_NAME_Release=blackjackv1.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin_1-Windows/package/blackjackv1.tar
 #
 # include compiler specific variables
 #

@@ -64,6 +64,10 @@ int Player::iniHand() {
     
 }
 
+void Player::setHand(int n) {
+    hand = n;
+}
+
 Player& Player::operator ++(int n) {
     wins++;
     losses++;

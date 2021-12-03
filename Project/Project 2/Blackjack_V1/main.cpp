@@ -1,10 +1,9 @@
 /* 
  * File:   main.cpp
  * Author: Christian Fuentes
- * Created on December 1, 2021. 7:36 PM
- * Purpose:  Creating players using classes. Adding dealer.
- * Below is plan from last version.
- * Plan: Add operator overloading to wins/draws/losses. Eventually.
+ * Created on December 2, 2021. 3:38 PM
+ * Purpose:  Blackjack in function form. Not going to make the game an object yet.
+ * Going to use logic from last project 1.
  */
 
 //System Libraries
@@ -18,7 +17,11 @@ using namespace std;
 //Global Constants - No Global Variables
 
 //Function Prototypes
-
+void game(Player&,Dealer&);
+Player p1Menu(Player);
+Dealer dealerMenu(Dealer);
+bool check21(int);
+Player chckWin(Player&,Dealer&);
 //Execution Begins Here
 int main(int argc, char** argv) {
 
@@ -26,43 +29,102 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(NULL)));
     //Declare Variable Data Types and Constants
     Player p1("Christian");
-    Player p2 = p1;
     Dealer dealer;
-    int random = rand()%52;
     //Initialize Variables
     
     //Process or map Inputs to Outputs
-    cout << "p1 :\n";
-    cout << p1.getName() << '\n';
-    cout << p1.getWins() << '\n';
-    cout << p1.getLoss() << '\n';
-    cout << p1.getPush() << '\n';
-    cout << p1.getHand() << '\n';
-    cout << "p2 :\n";
-    cout << p2.getName() << '\n';
-    cout << p2.getWins() << '\n';
-    cout << p2.getLoss() << '\n';
-    cout << p2.getPush() << '\n';
-    cout << p2.getHand() << '\n';
-    
-    
-    p1++;
-    p2++;
-    
-    cout << "p1 wins after ++ operator: " << p1.getWins() << '\n';
-    
-    p1+p2;
-    
-    cout << "p1 wins after + operator with p2: " << p1.getWins() << '\n';
-    
-    p1-p2;
-    
-    cout << "p1 wins after - operator with p2: " << p1.getWins() << '\n';
-    
+    game(p1,dealer);
     //Display Outputs
     
     //Reallocate Memory
     
     //Exit stage right!
     return 0;
+}
+
+void game(Player &p1, Dealer &dealer) {
+    int random = rand()%52;
+    p1.iniHand();
+    dealer.iniHand();
+    
+    if (check21(dealer.getHand()) == true) {
+        cout << "Dealer got 21.\n";
+        return;
+    }
+    else if (check21(p1.getHand()) == true) {
+        cout << "Player got 21.\n";
+        return;
+    }
+    
+    p1Menu(p1);
+    while (dealer.getHand() < 17) {
+        random = rand()%52;
+        dealer.draw(random);
+    }
+
+    chckWin(p1,dealer);
+}
+
+Player p1Menu(Player p1) {
+    char choice;
+    int random = rand()%52;
+    do {
+        cout << "Press 1 to hit.\n";
+        cout << "Press 2 to stand.\n";
+        cin>>choice;
+        if (choice == '1' && p1.getHand() < 21) {
+            p1.draw(random);
+        }
+        cout << p1.getName() << " hand is " << p1.getHand() << '\n';
+        random = rand()%52;
+    }while (choice == '1' && p1.getHand() < 21);
+    return p1;
+}
+
+
+bool check21 (int hand) {
+    if (hand == 21) {
+        return true;
+    }
+    return false;
+}
+
+Player chckWin (Player &p1, Dealer &dealer) {
+    if (dealer.getHand() == 21 && p1.getHand() == 21) {           //dealer compare for 21 and player 21
+        cout << "PUSH!" << endl;
+        return p1;
+    }
+    else if (dealer.getHand() == 21 && p1.getHand() != 21) {     //dealer check for 21
+        cout << "DEALER GOT 21!" << endl;
+        return p1;
+    }
+    else if (dealer.getHand() != 21 && p1.getHand() == 21) {     //player check  for 21
+        cout << "PLAYER GOT 21!" << endl;
+        return p1;
+    }
+    else {
+        if (p1.getHand() > 21) {                            //check for player bust
+            cout << "PLAYER BUSTED!" << endl;
+            return p1;
+        }
+        else if (dealer.getHand() > 21) {                   //check for dealer bust
+            cout << "DEALER BUSTED!" << endl;
+            return p1;
+        }
+        else {
+            if (dealer.getHand() > p1.getHand()) {              //check if dealer greater
+                cout << "DEALER WINS!" << endl;
+                return p1;
+            }
+            else if (dealer.getHand() == p1.getHand()) {        //check push
+                cout << "PUSH!" << endl;
+                return p1;
+            }
+            else if (dealer.getHand() < p1.getHand()) {         //check player greater
+                cout << "PLAYER WINS!" << endl;
+                return p1;
+            }
+        }
+    }
+    return p1;                                        //return to keep track of player.
 }

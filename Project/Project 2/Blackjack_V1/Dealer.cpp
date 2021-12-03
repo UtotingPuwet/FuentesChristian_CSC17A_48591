@@ -23,6 +23,7 @@ Dealer::Dealer() {
 }
 
 int Dealer::iniHand() {
+    hand = 0;
     int random = rand()%52;
     hand += dealDek.deal(random,name);
     random = rand()%52;
@@ -33,14 +34,16 @@ int Dealer::iniHand() {
 int Dealer::draw(int random) {
     int n = dealDek.deal(random,name);
     if (n == 1 && hand < 10) {
-        cout << name << " got a ";
         return hand += 11;
     }
     else {
-        cout << name << " got a ";
         return hand += n;
     }
     return hand += n;
+}
+
+void Dealer::setHand(int n) {
+    hand = n;
 }
 
 

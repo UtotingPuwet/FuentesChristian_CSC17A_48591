@@ -29,6 +29,7 @@ public:
     
     int iniHand();
     int draw(int);
+    void setHand(int);
 };
 
 
