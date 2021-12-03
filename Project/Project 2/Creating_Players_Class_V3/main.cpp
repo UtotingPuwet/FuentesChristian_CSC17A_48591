@@ -1,10 +1,9 @@
 /* 
  * File:   main.cpp
  * Author: Christian Fuentes
- * Created on December 1, 2021. 7:36 PM
- * Purpose:  Creating players using classes. Adding dealer.
+ * Created on December 1, 2021. 11:23 PM
+ * Purpose:  Add operator overloading to wins/draws/losses. Add copy constructor to player.
  * Below is plan from last version.
- * Plan: Add operator overloading to wins/draws/losses. Eventually.
  */
 
 //System Libraries
