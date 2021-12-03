@@ -37,6 +37,7 @@ public:
     string getName() {return name;}
     
     int iniHand();
+    void setHand(int);
     int draw(int);
     
     Player& operator++(int);
