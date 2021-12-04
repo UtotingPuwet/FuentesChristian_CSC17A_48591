@@ -18,7 +18,6 @@
 using namespace std;
 
 Menu::Menu(string name) {
-    name  = "Christian";
     this->name = name;
     p1.setName(name);
 }
@@ -61,7 +60,7 @@ void Menu::useMenu() {
             }
         }while (*choice != '1');
         delete []choice;
-        Game blckjack("Christian");
+        Game blckjack(name);
         blckjack.game();
     }
     catch(int x) {
