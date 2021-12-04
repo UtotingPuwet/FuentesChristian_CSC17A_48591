@@ -15,7 +15,7 @@
 #include <iostream>
 
 
-
+//Default constructor
 Player::Player() {
     name = "John Doe";
     wins = 0;
@@ -25,6 +25,7 @@ Player::Player() {
 }
 
 
+//Super constructor
 Player::Player(string name) {
     this->name = name;
     wins = 0;
@@ -33,6 +34,7 @@ Player::Player(string name) {
     hand = 0;
 }
 
+//Copy constructor
 Player::Player(const Player &p2) {
     wins  = p2.wins;
     losses = p2.losses;
@@ -72,6 +74,12 @@ void Player::setName(string name) {
     this->name = name;
 }
 
+//ALL OF BELOW ARE OVERLOADED OPERATORS.
+//These stayed in the program because they are what I actually used to test 
+//Operator overloading on the dummies.
+//So this is like the "real" admin mode as you wouldn't have to go through
+//The menu I made to test operator overloading instead you would use these
+//Functions and test them through main.cpp
 Player& Player::operator ++(int n) {
     wins++;
     losses++;

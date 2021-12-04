@@ -61,6 +61,9 @@ int Card::getVal(int n) {
     return (n%13)+1;
 }
 
+//In order to make a deck array I would of had to initialize all 52
+//Cards in the array at the time the deck is created or make a function like
+//This one where it would initialize the card, post-deck creation.
 void Card::iniCard(int n) {
     face = setFace(n);
     suit = setSuit(n);
