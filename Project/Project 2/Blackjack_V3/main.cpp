@@ -3,10 +3,8 @@
  * Author: Christian Fuentes
  * Created on December 3, 2021. 12:51 PM
  * Purpose:
- * Version 3 will probably have betting and I will code out the menu as well as the "admin" mode to let users toy around
- * with other features such as adding object and proving other concepts I have learned
- * I will also add more comments to explain this entire 1000 line project.
- * Well this is version 3. 
+ *Alright scrapped the betting idea because it would take too many lines to implement :)
+ * I documented and coded everything. I added the admin mode and everything is working just fine.
  */
 
 //System Libraries
@@ -27,10 +25,12 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(NULL)));
     //Declare Variable Data Types and Constants
     string name;
-    Menu menu(name);
-    //Initialize Variables
     
+    //Initialize Variables
+    cout << "What is your name? (First name only no spaces).\n";
+    cin>>name;
     //Process or map Inputs to Outputs
+    Menu menu(name);
     menu.useMenu();
     
     //Display Outputs
