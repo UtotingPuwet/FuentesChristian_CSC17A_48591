@@ -22,6 +22,8 @@ Dealer::Dealer() {
     hand = 0;
 }
 
+//this uses a hidden deck draw that doesn't print to command line the second
+//card the dealer had drew.
 int Dealer::iniHand() {
     hand = 0;
     int random = rand()%52;
@@ -31,6 +33,8 @@ int Dealer::iniHand() {
     return hand;
 }
 
+//This will be for all future dealer draws (so every card after the first 
+//initial 2 cards
 int Dealer::draw(int random) {
     int n = dealDek.deal(random,name);
     if (n == 1 && hand < 10) {
@@ -47,4 +51,5 @@ void Dealer::setHand(int n) {
 }
 
 
+//Random names :) just 5 of them.
 string Dealer::names[5] = {"Aisha", "Annallea", "Adrianna", "Ashley", "Amber"};

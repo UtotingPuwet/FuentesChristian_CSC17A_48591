@@ -15,6 +15,9 @@
 #include <iostream>
 using namespace std;
 
+//This works the same as the deck for players.
+//Just wanted to make another one for the dealer because the dealers always,
+//Have their own decks.
 DealDek::DealDek() {
     for (int i = 0; i < 52; i++) {
         dealDek[i].iniCard(i);
@@ -30,6 +33,8 @@ int DealDek::deal(int i,string name) {
     return dealDek[i].getVal();
 }
 
+//Hidden deal where it doesn't print what the card is.
+//This is specifically for draw #2 for the dealer.
 int DealDek::hidDeal(int i) {
     return dealDek[i].getVal();
 }

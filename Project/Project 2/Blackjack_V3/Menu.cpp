@@ -69,6 +69,11 @@ void Menu::useMenu() {
     } 
 }
 
+
+//Admin function where I let users play around with dummy object
+//This is to specifically show off: templates and operator overloading.
+//This isn't too complicated to follow along with and also has 
+//Exception handling.
 void Menu::admin() {
     char choice;
     cout << "Welcome to admin mode of my game!\n"

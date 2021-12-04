@@ -42,11 +42,13 @@ public:
     void setName(string);
     int draw(int);
     
+    //Operator overloading.
     Player& operator++(int);
     Player& operator--(int);
     Player& operator+(const Player&);
     Player& operator-(const Player&);
     
+    //friend operator
     friend Player chckWin (Player &p1, int dealer);
 };
 

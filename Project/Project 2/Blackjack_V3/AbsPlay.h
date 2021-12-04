@@ -18,6 +18,8 @@
 #include <cstring>
 using namespace std;
 
+//This is an abstract player that  is used for both dealer and player.
+//Made this first before either class to have a setup of what both need.
 class AbsPlay {
 public:
     virtual int iniHand() = 0;

@@ -35,6 +35,9 @@ void Game::game() {
     chckWin(p1,dealer.getHand());
 }
 
+//This menu is for player once they get their initial 2 cards they then get to choose whether to
+//Stand or hit and they are only allowed to draw if their hand isn't over 21 becasue if it is
+//Then the player busted.
 Player Game::p1Menu(Player p1) {
     char choice;
     int random = rand()%52;
@@ -52,6 +55,8 @@ Player Game::p1Menu(Player p1) {
 }
 
 
+//Checking for if either person got 21.
+//Check game() function to see how it works
 bool Game::check21 (int hand) {
     if (hand == 21) {
         return true;
@@ -59,6 +64,8 @@ bool Game::check21 (int hand) {
     return false;
 }
 
+//So here it will check who won if neither the  player or the dealer got 21
+//in the initial 2 cards. It will return player object with either a win,loss, or push
 Player chckWin (Player &p1, int dealer) {
     if (dealer == 21 && p1.getHand() == 21) {           //dealer compare for 21 and player 21
         cout << "PUSH!" << endl;
@@ -107,6 +114,7 @@ Player chckWin (Player &p1, int dealer) {
     return p1;                                        //return to keep track of player.
 }
 
+//Menu for dealer. The dealer will keep drawing cards until the dealer is at 17 or busts.
 Dealer& Game::delMenu(Dealer &dealer) {
     int random = rand()%52;
     while (dealer.getHand() < 17) {
