@@ -14,6 +14,10 @@
 #ifndef DUMMY_H
 #define DUMMY_H
 
+
+
+///Doesn't do anything in game.
+///Dummy class only has wins losses and pushes. This is meant for the user to play with operator overloading + templates.
 template <class T>
 class Dummy {
 private:
@@ -26,35 +30,54 @@ public:
     T getLoss() {return losses;}
     T getPush() {return pushes;}
     
+    ///Default constructor
+    ///Sets everything to 0
     Dummy() {
         wins = 0;
         losses = 0;
         pushes = 0;
     }
-  Dummy& operator++(int n) {
-      wins++;
-      losses++;
-      pushes++;
+    
+    ///Overload operator ++
+    /// Adds 1 to wins/losses/pushes
+    /// \param n doesn't matter but is needed to make it work.
+    /// \return Dummy
+    Dummy& operator++(int n) {
+        wins++;
+        losses++;
+        pushes++;
+        return *this;
+    }
+    ///Overload operator --
+    /// Subtracts 1 to wins/losses/pushes
+    /// \param n doesn't matter but is needed to make it work.
+    /// \return Dummy
+    Dummy& operator--(int n) {
+        wins--;
+        losses--;
+        pushes--;
+        return *this;
+    }
+    ///Overload operator +
+    /// Lets user add two dummies together.
+    /// \param p2 is the other Dummy.
+    /// \return Dummy
+    Dummy& operator+(const Dummy& p2) {
+        wins = this->wins + p2.wins;
+        losses = this->losses + p2.losses;
+        pushes = this->pushes +  p2.pushes;
+        return *this;
+    }
+    ///Overload operator -
+    /// Lets use subtract to dummies together.
+    /// \param p2 is the other Dummy.
+    /// \return Dummy.
+    Dummy& operator-(const Dummy& p2) {
+        wins = this->wins - p2.wins;
+        losses = this->losses - p2.losses;
+        pushes = this->pushes - p2.pushes;
       return *this;
-  }  
-  Dummy& operator--(int n) {
-      wins--;
-      losses--;
-      pushes--;
-      return *this;
-  }
-  Dummy& operator+(const Dummy& p2) {
-      wins = this->wins + p2.wins;
-      losses = this->losses + p2.losses;
-      pushes = this->pushes +  p2.pushes;
-      return *this;
-  }
-  Dummy& operator-(const Dummy& p2) {
-      wins = this->wins - p2.wins;
-      losses = this->losses - p2.losses;
-      pushes = this->pushes - p2.pushes;
-      return *this;
-  }
+    }
 };
 
 

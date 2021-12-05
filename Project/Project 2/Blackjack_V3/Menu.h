@@ -17,15 +17,25 @@
 #include "Dummy.h"
 using namespace std;
 
+///Starting menu
 class Menu {
 private:
+    ///Name of the player
     string name;
+    ///Player 1 variable
     Player p1;
     
 public:
+    ///Super constructor
+    /// No default constructor because game shouldn't run without the player's name
+    /// \param name
     Menu(string);
     
+    ///Starting menu
+    ///Starting menu for players to navigate(lets users: player, see instructions, use admin mode, and quit program.)
     void useMenu();
+    ///Admin mode
+    ///Lets users have fun with the operator overloading and shows templates.
     void admin();
 };
 

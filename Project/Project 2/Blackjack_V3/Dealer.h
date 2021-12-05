@@ -15,6 +15,7 @@
 #define DEALER_H
 #include "Player.h"
 
+///The Dealer for BlackJack
 class Dealer : public AbsPlay{
 private:
     int hand;
@@ -22,13 +23,26 @@ private:
     DealDek dealDek;
     static string names[5];
 public:
+    ///Base Constructor
+    ///Sets hand, and picks random name.
     Dealer();
     
+    ///Get dealer's hand
+    /// \return hand
     int getHand() {return hand;}
+    ///Get dealer's name
+    /// \return name
     string getName() {return name;} 
     
+    ///Initialize dealer's hand
+    /// The first card is printed but not the second card
+    /// \return card value
     int iniHand();
+    
+    ///Dealer draw
     int draw(int);
+    /// Set dealer hand
+    /// \param hand
     void setHand(int);
 };
 

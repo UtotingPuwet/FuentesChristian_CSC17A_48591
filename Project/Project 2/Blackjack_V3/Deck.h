@@ -15,12 +15,16 @@
 #define DECK_H
 #include "Card.h"
 
+///Deck for Player
 class Deck {
 protected:
     Card *deck = new Card[52];
 public:
+    ///Base constructor, makes 52 cards.
     Deck();
+    ///Deconstructor
     ~Deck();
+    ///Deals card and prints the card.
     virtual int deal(int,string);
 };
 
