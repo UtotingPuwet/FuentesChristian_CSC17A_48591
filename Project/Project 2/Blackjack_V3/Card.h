@@ -16,6 +16,8 @@
 #include <string>
 using namespace std;
 
+
+///Cards for the Deck class
 class Card {
 private:
     string setFace(int);
@@ -27,11 +29,24 @@ protected:
     string suit;
     int val;
 public:
-    Card(int);
+    ///Default constructor
+    ///Used so that I don't have to initialize card when making card array. 
     Card();
+    ///Super constructor
+    ///Used in earlier versions, send in numbers between 0-51.
+    Card(int);
+    ///Get face string 
+    /// \return face string
     string getFace() {return face;}
+    ///Get suit string
+    /// \return suit string
     string getSuit() {return suit;}
+    ///Get card numeric value
+    /// \return card numeric value
     int getVal() {return val;}
+    ///Initialize card post-declaration
+    /// Used for when making card array and not wanting to initialize 52 cards.
+    /// \param any number 0-51.
     void iniCard(int);
     
 };
