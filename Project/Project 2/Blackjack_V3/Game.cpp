@@ -11,10 +11,10 @@
 
 
 Game::Game(string name) {
-    p1.setName(name);
+    
 }
 
-void Game::game() {
+void Game::game(Player &p1) {
     Dealer dealer;
     int random = rand()%52;
     p1.iniHand();
@@ -31,7 +31,9 @@ void Game::game() {
     
     p1Menu(p1);
     delMenu(dealer);
-
+    
+    cout << "Dealer hand is " << dealer.getHand() << '\n';
+    
     chckWin(p1,dealer.getHand());
 }
 

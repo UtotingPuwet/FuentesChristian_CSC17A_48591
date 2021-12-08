@@ -23,6 +23,7 @@ Menu::Menu(string name) {
 }
 
 void Menu::useMenu() {
+    char again;
     char *choice = new char [32];
     try {
         do {
@@ -61,7 +62,15 @@ void Menu::useMenu() {
         }while (*choice != '1');
         delete []choice;
         Game blckjack(name);
-        blckjack.game();
+        do {
+            blckjack.game(p1);
+            cout << "Do you want to play again?(Enter y or Y).\n";
+            cin>>again;
+        }while (again == 'y' || again == 'Y');
+        cout << "Name:    " << p1.getName() << '\n';
+        cout << "Wins:    " << p1.getWins() << '\n';
+        cout << "Losses:  " << p1.getLoss() << '\n';
+        cout << "Pushes:  " << p1.getPush() << '\n';
     }
     catch(int x) {
         delete []choice;
