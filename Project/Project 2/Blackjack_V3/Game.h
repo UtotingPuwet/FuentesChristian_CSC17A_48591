@@ -19,8 +19,6 @@ using namespace std;
 ///Blackjack game itself
 class Game {
 private:
-    string name;
-    Player p1;
     int nGames;
 public:
     ///Base constructor
@@ -31,7 +29,7 @@ public:
     /// All of blackjack will run in this single function while calling other utility functions.
     ///
     /// @see check21(int) p1Menu(Player) delMenu(Dealer&)
-    void game();
+    void game(Player &);
     /// Player menu during turn
     /// Gives choice to either hit or stand on player's turn, stops when hand >= 21
     /// \param Player
