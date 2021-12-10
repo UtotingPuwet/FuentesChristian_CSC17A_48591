@@ -26,7 +26,7 @@ private:
       pushes;
 public:
     
-    T getWin() {return wins;}
+    inline T getWin() {return wins;}
     T getLoss() {return losses;}
     T getPush() {return pushes;}
     
